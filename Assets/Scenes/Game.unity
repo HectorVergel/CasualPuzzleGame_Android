@@ -365,6 +365,7 @@ GameObject:
   - component: {fileID: 139587461}
   - component: {fileID: 139587463}
   - component: {fileID: 139587462}
+  - component: {fileID: 139587464}
   m_Layer: 0
   m_Name: bubble
   m_TagString: Untagged
@@ -430,6 +431,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139587460}
   m_CullTransparentMesh: 1
+--- !u!114 &139587464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139587460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 70
+    m_Right: 0
+    m_Top: 50
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &312112863
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,7 +1280,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7f68fe58bf3504b8e26cf1d5ab9da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_scoreGUI: {fileID: 0}
+  m_scoreGUI: {fileID: 1607446287}
+  m_currentLevelGUI: {fileID: 1791391952}
+  m_starsSockets:
+  - {fileID: 1239806577}
+  - {fileID: 1192032085}
+  - {fileID: 312112864}
+  m_starsProgressBar: {fileID: 105442241}
+  m_goalBubble: {fileID: 139587461}
+  m_fruitSprites:
+  - {fileID: 21300000, guid: b7481a4c424715542a70ac1efc7468db, type: 3}
+  - {fileID: 21300000, guid: a292bddf8693e00428dace4a7f770aa6, type: 3}
+  - {fileID: 21300000, guid: 23c39604c54f9f944ac7791b186f3dce, type: 3}
+  - {fileID: 21300000, guid: fbb6c45b2e0f5424cace793121f03e56, type: 3}
+  - {fileID: 21300000, guid: 5b0c287fddf11b24d910a6b285ee1807, type: 3}
+  - {fileID: 21300000, guid: 50dd2e8acaa7426438d693e39eb73026, type: 3}
+  - {fileID: 21300000, guid: 140169fe467b8b649aa2541e0c8d6c09, type: 3}
+  m_conditionPrefab: {fileID: 1473859197330526057, guid: f5c2464119ad6d941b68d8cf61c6303d, type: 3}
+  m_levels:
+  - {fileID: 11400000, guid: faf968c38cd36704c82e19048543685d, type: 2}
+  - {fileID: 11400000, guid: c120472be10d6374a8f5639227e80e92, type: 2}
 --- !u!1 &1085126211
 GameObject:
   m_ObjectHideFlags: 0
