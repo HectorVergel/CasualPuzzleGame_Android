@@ -45,10 +45,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        InitDictionary();
     }
     private void Start()
     {
-        InitDictionary();
         InitNewLevel();
     }
     private void InitDictionary()
@@ -105,6 +105,11 @@ public class GameManager : MonoBehaviour
     {
         m_currentLevel++;
     }
+
+    public Sprite GetFruitSprite(string _fruit)
+    {
+        return m_sprites[_fruit];
+    }
 }
 
 [System.Serializable]
@@ -122,7 +127,8 @@ public enum FRUITS
     GRAPE,
     APPLE,
     ORANGE,
-    STRAWBERRY
+    STRAWBERRY,
+    NONE
                
 
 }
