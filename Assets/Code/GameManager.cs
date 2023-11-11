@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        DontDestroyOnLoad(this);
         InitDictionary();
     }
     private void Start()
@@ -69,6 +71,13 @@ public class GameManager : MonoBehaviour
 
         CreateGoal();
 
+    }
+
+    public void LoadLevel(int _level)
+    {
+        SceneManager.LoadScene("Game");
+        if(_level != 0) m_currentLevel = _level - 1;
+        //InitNewLevel();
     }
     
     private void CreateGoal()

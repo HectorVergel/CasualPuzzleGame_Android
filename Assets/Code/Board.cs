@@ -6,8 +6,8 @@ public class Board : MonoBehaviour
     [Header("References")]
     public int m_height;
     public int m_width;
-    public BoardSocket m_socketPrefab;
-    public BoardSocket[,] m_board;
+    public Fruit m_socketPrefab;
+    public Fruit[,] m_board;
     public Transform m_boardSpawnPos;
     [Header("Fruits")]
     public List<GameObject> m_fruitsPrefab;
@@ -15,7 +15,7 @@ public class Board : MonoBehaviour
 
     private void Start()
     {
-        m_board = new BoardSocket[m_height, m_width];
+        m_board = new Fruit[m_height, m_width];
         InitBoard();
 
 
@@ -36,10 +36,10 @@ public class Board : MonoBehaviour
         CheckBoard();
 
         //CUSTOM BOARD
-        m_board[0, 0].DisableSocket();
-        m_board[0, 7].DisableSocket();
-        m_board[7, 0].DisableSocket();
-        m_board[7, 7].DisableSocket();
+        m_board[0, 0].DisableFruit();
+        m_board[0, 7].DisableFruit();
+        m_board[7, 0].DisableFruit();
+        m_board[7, 7].DisableFruit();
     }
 
     private void CheckBoard()
@@ -63,18 +63,18 @@ public class Board : MonoBehaviour
 
     private void CreateFruitInBoard(int x, int y)
     {
-        BoardSocket l_socket = Instantiate(m_socketPrefab, this.gameObject.transform);
+        Fruit l_socket = Instantiate(m_socketPrefab, this.gameObject.transform);
         l_socket.transform.localPosition = new Vector2(x - 3.5f, y - 3.5f);
-        l_socket.InitSocketWithFruit(GetRandomFruit());
+        l_socket.InitFruit(GetRandomFruit(), x, y);
         m_board[x, y] = l_socket;
     }
 
     private void CreateFruitInBoard(int x, int y, FRUITS _actualFruit)
     {
         Destroy(m_board[x, y].gameObject);
-        BoardSocket l_socket = Instantiate(m_socketPrefab, this.gameObject.transform);
+        Fruit l_socket = Instantiate(m_socketPrefab, this.gameObject.transform);
         l_socket.transform.localPosition = new Vector2(x - 3.5f, y - 3.5f);
-        l_socket.InitSocketWithFruit(GetRandomFruit(_actualFruit));
+        l_socket.InitFruit(GetRandomFruit(_actualFruit), x, y);
         m_board[x, y] = l_socket;
     }
     private bool CheckIfFruitIsAvailable(int x, int y)
