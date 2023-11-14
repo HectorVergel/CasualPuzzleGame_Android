@@ -4,7 +4,7 @@ public class Fruit : MonoBehaviour
 {
     [Header("References")]
     public Transform m_spawnPosition;
-    public FRUITS m_currentFruitHolding = FRUITS.NONE;
+    public FRUITS m_type = FRUITS.NONE;
     public SpriteRenderer m_spriteRenderer;
 
 
@@ -16,26 +16,28 @@ public class Fruit : MonoBehaviour
     private int m_col;
     private int m_row;
 
-    public void InitFruit(FRUITS _fruit, int _row, int _col)
+    public void InitFruit(FRUITS _fruit, int _col, int _row)
     {   if (_fruit == FRUITS.NONE) return;
     
         string l_fruit = _fruit.ToString().ToLower();
         m_spriteRenderer.sprite = GameManager.instance.GetFruitSprite(l_fruit);
-        m_currentFruitHolding = _fruit;
+        m_type = _fruit;
 
-        m_row = _row;
         m_col = _col;
+        m_row = _row;
     }
 
     public void DisableFruit()
     {
         m_spriteRenderer.sprite = null;
-        m_currentFruitHolding = FRUITS.NONE;
+        m_type = FRUITS.NONE;
     }
 
     private void OnMouseDown()
     {
         m_firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        HandleFruitPosOnBoard();
+        
     }
 
     private void OnMouseUp()
@@ -53,5 +55,15 @@ public class Fruit : MonoBehaviour
     private void HandleFruitPosOnBoard()
     {
         //TODO: Change col and row depending on the swipe
+        if(m_swipeAngle > -45 && m_swipeAngle <= 45)
+        {
+            m_otherFruit = Board.instance.m_board[m_col + 1, m_row].m_fruitHolding;
+            m_otherFruit.GetComponent<Fruit>().m_col -= 1;
+            m_col += 1;
+
+            transform.position = new Vector2(transform.position.x + 0.5f, transform.position.y);
+            m_otherFruit.transform.position = new Vector2(transform.position.x - 0.5f, transform.position.y);
+        }
+        
     }
 }

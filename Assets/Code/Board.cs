@@ -6,18 +6,33 @@ public class Board : MonoBehaviour
     [Header("References")]
     public int m_height;
     public int m_width;
-    public Fruit m_socketPrefab;
-    public Fruit[,] m_board;
+    public Fruit m_fruitPrefab;
+    public BoardSocket m_socketPrefab;
+    public BoardSocket[,] m_board;
     public Transform m_boardSpawnPos;
     [Header("Fruits")]
     public List<GameObject> m_fruitsPrefab;
 
 
+    public static Board instance;
+
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
-        m_board = new Fruit[m_height, m_width];
+        m_board = new BoardSocket[m_width, m_height];
         InitBoard();
-
 
     }
 
@@ -29,17 +44,17 @@ public class Board : MonoBehaviour
             for (int y = 0; y < m_board.GetLength(1); y++)
             {
 
-                CreateFruitInBoard(x, y);
+                CreateSocket(x, y);
             }
         }
 
         CheckBoard();
 
         //CUSTOM BOARD
-        m_board[0, 0].DisableFruit();
+        /*m_board[0, 0].DisableFruit();
         m_board[0, 7].DisableFruit();
         m_board[7, 0].DisableFruit();
-        m_board[7, 7].DisableFruit();
+        m_board[7, 7].DisableFruit();*/
     }
 
     private void CheckBoard()
@@ -50,31 +65,27 @@ public class Board : MonoBehaviour
             {
                 if (!CheckIfFruitIsAvailable(x, y))
                 {
-                    CreateFruitInBoard(x, y, m_board[x, y].m_currentFruitHolding);
-
+                    CreateSocket(x, y, m_board[x, y].m_fruitHolding.m_type);
 
                 }
             }
         }
-
-
-
     }
 
-    private void CreateFruitInBoard(int x, int y)
+    private void CreateSocket(int x, int y)
     {
-        Fruit l_socket = Instantiate(m_socketPrefab, this.gameObject.transform);
+        BoardSocket l_socket = Instantiate(m_socketPrefab, this.gameObject.transform);
         l_socket.transform.localPosition = new Vector2(x - 3.5f, y - 3.5f);
-        l_socket.InitFruit(GetRandomFruit(), x, y);
+        l_socket.InitSocket(x,y,m_fruitPrefab,GetRandomFruit());
         m_board[x, y] = l_socket;
     }
 
-    private void CreateFruitInBoard(int x, int y, FRUITS _actualFruit)
+    private void CreateSocket(int x, int y, FRUITS _actualFruit)
     {
         Destroy(m_board[x, y].gameObject);
-        Fruit l_socket = Instantiate(m_socketPrefab, this.gameObject.transform);
+        BoardSocket l_socket = Instantiate(m_socketPrefab, this.gameObject.transform);
         l_socket.transform.localPosition = new Vector2(x - 3.5f, y - 3.5f);
-        l_socket.InitFruit(GetRandomFruit(_actualFruit), x, y);
+        l_socket.InitSocket(x,y,m_fruitPrefab, GetRandomFruit(_actualFruit));
         m_board[x, y] = l_socket;
     }
     private bool CheckIfFruitIsAvailable(int x, int y)
@@ -86,19 +97,19 @@ public class Board : MonoBehaviour
         if (x >= 0 && x < rows && y >= 0 && y < cols && x + 2 < rows && y < cols)
         {
             // Comprobar la fruta a la derecha
-            if (x + 1 < rows && m_board[x, y].m_currentFruitHolding == m_board[x + 1, y].m_currentFruitHolding)
+            if (x + 1 < rows && m_board[x, y].m_fruitHolding == m_board[x + 1, y].m_fruitHolding)
             {
                 l_result = false;
             }
-            else if (x - 1 >= 0 && m_board[x, y].m_currentFruitHolding == m_board[x - 1, y].m_currentFruitHolding)
+            else if (x - 1 >= 0 && m_board[x, y].m_fruitHolding == m_board[x - 1, y].m_fruitHolding)
             {
                 l_result = false;
             }
-            else if (y - 1 >= 0 && m_board[x, y].m_currentFruitHolding == m_board[x, y - 1].m_currentFruitHolding)
+            else if (y - 1 >= 0 && m_board[x, y].m_fruitHolding == m_board[x, y - 1].m_fruitHolding)
             {
                 l_result = false;
             }
-            else if (y + 1 < cols && m_board[x, y].m_currentFruitHolding == m_board[x, y + 1].m_currentFruitHolding)
+            else if (y + 1 < cols && m_board[x, y].m_fruitHolding == m_board[x, y + 1].m_fruitHolding)
             {
                 l_result = false;
             }

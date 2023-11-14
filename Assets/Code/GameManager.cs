@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<string, Sprite> m_sprites = new Dictionary<string, Sprite>();
 
+
     private void Awake()
     {
         if (instance == null)
