@@ -640,7 +640,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_height: 8
   m_width: 8
-  m_socketPrefab: {fileID: 409796412273925246, guid: 6f310ff149409764c8d7ba758bfc1f40, type: 3}
+  m_fruitPrefab: {fileID: 409796412273925246, guid: 6f310ff149409764c8d7ba758bfc1f40, type: 3}
+  m_socketPrefab: {fileID: 5888400249470927473, guid: f84aca6c87fdb804eb222b967ec942b1, type: 3}
   m_boardSpawnPos: {fileID: 0}
   m_fruitsPrefab: []
 --- !u!1 &312112863

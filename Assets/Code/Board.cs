@@ -51,10 +51,10 @@ public class Board : MonoBehaviour
         CheckBoard();
 
         //CUSTOM BOARD
-        /*m_board[0, 0].DisableFruit();
-        m_board[0, 7].DisableFruit();
-        m_board[7, 0].DisableFruit();
-        m_board[7, 7].DisableFruit();*/
+        m_board[0, 0].m_fruitHolding.DisableFruit();
+        m_board[0, 7].m_fruitHolding.DisableFruit(); 
+        m_board[7, 0].m_fruitHolding.DisableFruit(); 
+        m_board[7, 7].m_fruitHolding.DisableFruit(); 
     }
 
     private void CheckBoard()
@@ -82,7 +82,7 @@ public class Board : MonoBehaviour
 
     private void CreateSocket(int x, int y, FRUITS _actualFruit)
     {
-        Destroy(m_board[x, y].gameObject);
+        Destroy(m_board[x, y].m_fruitHolding.gameObject);
         BoardSocket l_socket = Instantiate(m_socketPrefab, this.gameObject.transform);
         l_socket.transform.localPosition = new Vector2(x - 3.5f, y - 3.5f);
         l_socket.InitSocket(x,y,m_fruitPrefab, GetRandomFruit(_actualFruit));

@@ -12,6 +12,7 @@ public class BoardSocket : MonoBehaviour
         this.m_col = _col;
         this.m_row = _row;
         this.m_fruitHolding = Instantiate(_prefab, transform.position, Quaternion.identity);
+        this.m_fruitHolding.transform.SetParent(Board.instance.transform);
         this.m_fruitHolding.InitFruit(_type, m_col, m_row);
         
     }
