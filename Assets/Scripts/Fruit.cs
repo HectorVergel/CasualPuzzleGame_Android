@@ -58,8 +58,11 @@ public class Fruit : MonoBehaviour
         if(m_swipeAngle > -45 && m_swipeAngle <= 45)
         {
             m_otherFruit = Board.instance.m_board[m_col + 1, m_row].m_fruitHolding;
+            Board.instance.m_board[m_col + 1, m_row].m_fruitHolding = this;
+            Board.instance.m_board[m_col, m_row].m_fruitHolding = m_otherFruit;
             m_otherFruit.GetComponent<Fruit>().m_col -= 1;
             m_col += 1;
+
 
             transform.position = new Vector2(transform.position.x + 0.5f, transform.position.y);
             m_otherFruit.transform.position = new Vector2(transform.position.x - 0.5f, transform.position.y);
